@@ -1,0 +1,19 @@
+[build-system]
+requires = ["setuptools>=68", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "mazegen"
+version = "0.1.0"
+description = "A-Maze-ing maze generator and solver"
+readme = "README.md"
+requires-python = ">=3.10"
+authors = [
+    { name = "sevyesil" },
+    { name = "melipola" },
+]
+license = "MIT"
+license-files = ["LICENSE.md"]
+
+[tool.setuptools.packages.find]
+include = ["mazegen*"]
