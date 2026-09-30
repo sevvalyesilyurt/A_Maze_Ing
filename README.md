@@ -446,20 +446,20 @@ project:
 
 ### AI Usage
 
-AI tools were used as a supplementary learning and research resource during
-the project.
+AI tools were used as a supplementary resource to support learning, research,
+and documentation throughout the project.
 
-AI assistance was mainly used for:
+They were mainly used to:
 
-- clarifying unfamiliar Python and algorithm concepts;
-- understanding error messages and debugging terminology;
-- researching DFS, BFS, maze generation, and path-finding concepts;
-- finding relevant documentation and learning resources;
-- improving the clarity and organization of project documentation;
-- reviewing the README for language and presentation.
+- clarify Python and algorithm-related concepts;
+- better understand error messages and debugging processes;
+- review topics such as DFS, BFS, maze generation, and path finding;
+- identify relevant technical documentation and learning resources;
+- improve the structure, clarity, and wording of the project documentation.
 
-The project requirements, implementation decisions, and final code were
-reviewed and understood by the team members.
+AI support was used as a reference during the development process, while the
+project requirements, implementation choices, and final code were reviewed and
+understood by the team members.
 
 ## License
 
