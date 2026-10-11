@@ -420,8 +420,8 @@ project:
   shortest-path solver.
   https://bilgisayarkavramlari.com/2008/11/13/sig-oncelikli-arama-breadth-first-search/
 
-- **Dokuz Eylül University — Research on Search Algorithms in Two-Dimensional** —
-  Mazes** — consulted as an academic reference for the use of search
+- **Dokuz Eylül University — Research on Search Algorithms in Two-Dimensional Mazes** — 
+  consulted as an academic reference for the use of search
   algorithms such as DFS and BFS in maze problems.
 
 - **Al Sweigart — The Recursive Book of Recursion: Maze Generator** —
