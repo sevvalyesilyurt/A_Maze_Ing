@@ -117,7 +117,7 @@ Install the project with:
 make install
 ```
 
-or directly with:
+Or directly with:
 
 ```bash
 python3 -m pip install .
@@ -131,7 +131,7 @@ Run the project with:
 make run
 ```
 
-or:
+Or:
 
 ```bash
 python3 a_maze_ing.py config.txt
@@ -209,10 +209,10 @@ used during maze generation.
 
 The validator can:
 
-- verify that every non-blocked cell was visited during generation;
-- verify that all non-blocked cells belong to one connected maze region;
-- check whether a rectangular group of cells is completely open;
-- detect invalid fully open `3x3` areas.
+- Verify that every non-blocked cell was visited during generation;
+- Verify that all non-blocked cells belong to one connected maze region;
+- Check whether a rectangular group of cells is completely open;
+- Detect invalid fully open `3x3` areas.
 
 Keeping these checks in a separate class keeps validation logic independent from the
 maze-generation algorithm and makes the generator easier to maintain.
@@ -246,9 +246,9 @@ Cells are written row by row, with one maze row per line.
 
 After the hexadecimal maze, the output contains an empty line followed by:
 
-1. the entry coordinates;
-2. the exit coordinates;
-3. the shortest valid path encoded with `N`, `E`, `S`, and `W`.
+1. The entry coordinates;
+2. The exit coordinates;
+3. The shortest valid path encoded with `N`, `E`, `S`, and `W`.
 
 All output lines end with a newline character.
 
@@ -270,11 +270,11 @@ The maze is displayed directly in the terminal.
 
 The visualization distinguishes:
 
-- maze walls;
-- the entry with `E`;
-- the exit with `X`;
-- blocked `42` cells;
-- the shortest path with `●`.
+- Maze walls;
+- The entry with `E`;
+- The exit with `X`;
+- Blocked `42` cells;
+- The shortest path with `●`.
 
 When the entry or exit is located on the outer border, the renderer displays a visual opening in that border to make the maze entrance and exit clearer. This affects only the terminal visualization; the maze data keeps its external border walls closed.
 
@@ -338,26 +338,26 @@ The project was developed collaboratively by `sevyesil` and `melipola`. Responsi
 
 `sevyesil` focused mainly on the core Python architecture and maze generation logic. Her responsibilities included:
 
-- designing the main project architecture and separation of components;
-- implementing the maze and cell data structures;
-- implementing the randomized DFS maze generation algorithm;
-- implementing perfect and non-perfect maze generation behavior;
-- implementing loop generation and dead-end reduction logic;
-- developing maze validation for visited cells, connectivity, and invalid open areas;
-- implementing shortest-path solving;
-- integrating the main generation components and resolving Python typing and structural issues.
+- Designing the main project architecture and separation of components;
+- Implementing the maze and cell data structures;
+- Implementing the randomized DFS maze generation algorithm;
+- Implementing perfect and non-perfect maze generation behavior;
+- Implementing loop generation and dead-end reduction logic;
+- Developing maze validation for visited cells, connectivity, and invalid open areas;
+- Implementing shortest-path solving;
+- Integrating the main generation components and resolving Python typing and structural issues.
 
 #### melipola
 
 `melipola` focused mainly on configuration, visualization, user interaction, and project documentation. Her responsibilities included:
 
-- implementing and checking configuration file handling;
-- contributing to the `42` pattern placement and its integration with maze generation;
-- developing the terminal maze visualization;
-- implementing entry, exit, blocked-cell, and shortest-path display;
-- implementing interactive controls for showing or hiding the path, regenerating the maze, and changing wall colours;
-- contributing to output-file generation and format verification;
-- contributing to README documentation and final project verification.
+- Implementing and checking configuration file handling;
+- Contributing to the `42` pattern placement and its integration with maze generation;
+- Developing the terminal maze visualization;
+- Implementing entry, exit, blocked-cell, and shortest-path display;
+- Implementing interactive controls for showing or hiding the path, regenerating the maze, and changing wall colours;
+- Contributing to output-file generation and format verification;
+- Contributing to README documentation and final project verification.
 
 Both team members worked together during integration to verify that the perfect and non-perfect maze modes satisfied the project requirements. They also collaborated on debugging, trying different configurations, reviewing generated mazes, and preparing the project for evaluation.
 
@@ -394,40 +394,40 @@ The project was developed and verified using tools including:
 - flake8;
 - mypy;
 - Python virtual environments;
-- a terminal and code editor.
+- A terminal and code editor.
 
 ## Resources
 
 The following resources were consulted during the research and development of the
 project:
 
-- **A-Maze-ing Subject** — used as the main reference for project requirements,
+- **A-Maze-ing Subject** — Used as the main reference for project requirements,
   configuration format, maze rules, hexadecimal wall representation, visualization,
   and reusable-module requirements.
 
-- **BTK Akademi — Yapay Zekâ ve Algoritmalarına Giriş** — consulted while reviewing
+- **BTK Akademi — Yapay Zekâ ve Algoritmalarına Giriş** — Consulted while reviewing
   search algorithms and concepts related to DFS and BFS.
 
-- **BTK Akademi — Algoritma Programlama ve Veri Yapılarına Giriş** — used as an
+- **BTK Akademi — Algoritma Programlama ve Veri Yapılarına Giriş** — Used as an
   additional reference for fundamental algorithm, stack, queue, graph, and
   data-structure concepts.
 
-- **Bilgisayar Kavramları — Şadi Evren Şeker** — consulted as a Turkish reference
+- **Bilgisayar Kavramları — Şadi Evren Şeker** — Consulted as a Turkish reference
   for Breadth-First Search and graph-traversal concepts.
 
-- **Al Sweigart — The Recursive Book of Recursion, “Maze Generator”** — consulted
+- **Al Sweigart — The Recursive Book of Recursion, “Maze Generator”** — Consulted
   for maze-generation concepts such as recursive backtracking, visited cells,
   random neighbor selection, and corridor carving.
 
-- **Python Documentation** — used as a reference for Python language features,
+- **Python Documentation** — Used as a reference for Python language features,
   type annotations, file handling, `random`, and `collections.deque`.
 
-- **Python Packaging User Guide** — used while preparing `pyproject.toml`, the
+- **Python Packaging User Guide** — Used while preparing `pyproject.toml`, the
   reusable `mazegen` package, and the wheel distribution.
 
-- **mypy Documentation** — used for static type checking and type-annotation issues.
+- **mypy Documentation** — Used for static type checking and type-annotation issues.
 
-- **Flake8 Documentation** — used for Python style and linting checks.
+- **Flake8 Documentation** — Used for Python style and linting checks.
 
 ### AI Usage
 
