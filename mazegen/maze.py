@@ -66,31 +66,6 @@ class Maze:
             )
         return self.cells[y][x]
 
-    def get_boundary_directions(
-        self,
-        x: int,
-        y: int,
-    ) -> list[str]:
-        """Return maze boundaries touched by a cell.
-
-        Args:
-            x: Horizontal coordinate.
-            y: Vertical coordinate.
-
-        Returns:
-            Cardinal directions that touch the maze boundary.
-        """
-        directions: list[str] = []
-        if y == 0:
-            directions.append("N")
-        if x == self.width - 1:
-            directions.append("E")
-        if y == self.height - 1:
-            directions.append("S")
-        if x == 0:
-            directions.append("W")
-        return directions
-
     def get_neighbors(
         self,
         cell: Cell,

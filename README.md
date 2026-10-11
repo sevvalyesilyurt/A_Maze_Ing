@@ -62,7 +62,7 @@ A_Maze_Ing/
 - `config.py` reads and validates the configuration file.
 - `generator.py` contains the randomized DFS generation logic and the perfect/non-perfect generation behavior.
 - `pattern.py` handles placement of the blocked `42` pattern.
-- `validator.py` contains validation utilities for connectivity, walls, open areas, loops, and dead ends.
+- `validator.py` contains validation utilities for visited cells, full connectivity, and invalid fully open `3x3` areas.
 - `solver.py` finds the shortest path between entry and exit.
 - `output.py` writes the hexadecimal maze and solution information to the configured output file.
 - `renderer.py` creates the terminal representation of the maze.
@@ -204,19 +204,18 @@ If the maze is too small or no valid position exists for the pattern, the progra
 
 ## Maze Validation
 
-The project includes validation utilities for checking maze properties.
+The project includes a dedicated `MazeValidator` class for structural checks that are
+used during maze generation.
 
-`MazeValidator` can check:
+The validator can:
 
-- connectivity of accessible cells;
-- whether normal cells were visited during generation;
-- consistency between neighboring walls;
-- closed external borders;
-- presence of fully open `3x3` areas;
-- number of independent loops;
-- number and ratio of dead ends.
+- verify that every non-blocked cell was visited during generation;
+- verify that all non-blocked cells belong to one connected maze region;
+- check whether a rectangular group of cells is completely open;
+- detect invalid fully open `3x3` areas.
 
-These checks are kept separate from the core generation logic so that maze properties can be inspected without changing the generated structure.
+Keeping these checks in a separate class keeps validation logic independent from the
+maze-generation algorithm and makes the generator easier to maintain.
 
 ## Maze Solver
 
@@ -344,7 +343,7 @@ The project was developed collaboratively by `sevyesil` and `melipola`. Responsi
 - implementing the randomized DFS maze generation algorithm;
 - implementing perfect and non-perfect maze generation behavior;
 - implementing loop generation and dead-end reduction logic;
-- developing maze validation for connectivity, wall consistency, external borders, loops, dead ends, and open areas;
+- developing maze validation for visited cells, connectivity, and invalid open areas;
 - implementing shortest-path solving;
 - integrating the main generation components and resolving Python typing and structural issues.
 
@@ -376,7 +375,7 @@ Separating the project into focused components made the code easier to understan
 
 Using deterministic seeds was useful during development because the same maze could be reproduced when investigating generation behavior.
 
-Separating validation from generation also made it easier to inspect properties such as connectivity, wall consistency, loops, dead ends, and invalid open areas without adding those responsibilities directly to the generation algorithm.
+Separating validation from generation also made it easier to check connectivity and invalid open areas without adding those responsibilities directly to the generation algorithm.
 
 ### What Could Be Improved
 
@@ -399,62 +398,47 @@ The project was developed and verified using tools including:
 
 ## Resources
 
-The following resources were used during the research and development of the
+The following resources were consulted during the research and development of the
 project:
 
 - **A-Maze-ing Subject** — used as the main reference for project requirements,
-  maze rules, configuration format, hexadecimal wall representation,
-  visualization, and reusable-module requirements.
+  configuration format, maze rules, hexadecimal wall representation, visualization,
+  and reusable-module requirements.
 
-- **BTK Akademi — Yapay Zekâ ve Algoritmalarına Giriş** — used to review
-  Breadth-First Search (BFS), Depth-First Search (DFS), and general search
-  algorithm concepts.
-  https://www.btkakademi.gov.tr/portal/tr/course/17500
+- **BTK Akademi — Yapay Zekâ ve Algoritmalarına Giriş** — consulted while reviewing
+  search algorithms and concepts related to DFS and BFS.
 
-- **BTK Akademi — Algoritma Programlama ve Veri Yapılarına Giriş** — consulted
-  for fundamental algorithm, stack, queue, graph, and data-structure concepts.
-  https://www.btkakademi.gov.tr/portal/tr/course/12565
+- **BTK Akademi — Algoritma Programlama ve Veri Yapılarına Giriş** — used as an
+  additional reference for fundamental algorithm, stack, queue, graph, and
+  data-structure concepts.
 
-- **Bilgisayar Kavramları — Şadi Evren Şeker, Breadth-First Search (BFS)** —
-  consulted to better understand level-by-level graph traversal used by the
-  shortest-path solver.
-  https://bilgisayarkavramlari.com/2008/11/13/sig-oncelikli-arama-breadth-first-search/
+- **Bilgisayar Kavramları — Şadi Evren Şeker** — consulted as a Turkish reference
+  for Breadth-First Search and graph-traversal concepts.
 
-- **Dokuz Eylül University — Research on Search Algorithms in Two-Dimensional
-  Mazes** — consulted as an academic reference for the use of search
-  algorithms such as DFS and BFS in maze problems.
+- **Al Sweigart — The Recursive Book of Recursion, “Maze Generator”** — consulted
+  for maze-generation concepts such as recursive backtracking, visited cells,
+  random neighbor selection, and corridor carving.
 
-- **Al Sweigart — The Recursive Book of Recursion: Maze Generator** —
-  consulted for maze-generation concepts such as randomized movement,
-  visited cells, corridor carving, and backtracking.
-  https://inventwithpython.com/recursion/chapter11.html
+- **Python Documentation** — used as a reference for Python language features,
+  type annotations, file handling, `random`, and `collections.deque`.
 
-- **Python Documentation** — used for Python language features and standard
-  library components such as `random` and `collections.deque`.
-  https://docs.python.org/3/
+- **Python Packaging User Guide** — used while preparing `pyproject.toml`, the
+  reusable `mazegen` package, and the wheel distribution.
 
-- **Python Packaging User Guide** — used while preparing `pyproject.toml`,
-  the reusable `mazegen` package, and the wheel distribution.
-  https://packaging.python.org/
-
-- **mypy Documentation** — used for static type checking and type annotation
-  issues.
-  https://mypy.readthedocs.io/
+- **mypy Documentation** — used for static type checking and type-annotation issues.
 
 - **Flake8 Documentation** — used for Python style and linting checks.
-  https://flake8.pycqa.org/
 
 ### AI Usage
 
-AI tools were used as a supplementary resource during the development of the
-project.
+AI tools were used as a supplementary resource during the development of the project.
 
-They were used to support research and learning, clarify algorithmic concepts,
-assist with debugging, and suggest code snippets or alternative approaches for
-specific implementation problems.
+They were used to support research and learning, clarify algorithmic concepts, assist
+with debugging, and suggest small code snippets or alternative approaches for specific
+implementation problems.
 
-AI-assisted code was reviewed, tested, and adapted to the project's structure
-before being integrated. The final implementation and its behavior were
+AI-assisted code and suggestions were reviewed, adapted to the project's own structure,
+and checked before being integrated. The final implementation and its behavior were
 understood by the team members.
 
 ## License

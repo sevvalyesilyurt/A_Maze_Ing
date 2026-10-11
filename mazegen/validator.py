@@ -135,36 +135,6 @@ class MazeValidator:
                     return True
         return False
 
-    def count_independent_loops(self) -> int:
-        """Return the number of independent loops in the maze."""
-        vertex_count = 0
-        edge_count = 0
-
-        for row in self.maze.cells:
-            for cell in row:
-                if cell.blocked:
-                    continue
-
-                vertex_count += 1
-                neighbors = self.maze.get_neighbors(cell)
-
-                for direction in ("E", "S"):
-                    if direction not in neighbors:
-                        continue
-
-                    neighbor = neighbors[direction]
-                    if neighbor.blocked:
-                        continue
-                    if self.maze.can_move(
-                        cell,
-                        direction,
-                    ):
-                        edge_count += 1
-
-        if vertex_count == 0:
-            return 0
-        return edge_count - vertex_count + 1
-
     def count_dead_ends(self) -> int:
         """Return the number of dead-end cells in the maze."""
         dead_end_count = 0
@@ -188,69 +158,3 @@ class MazeValidator:
                     dead_end_count += 1
 
         return dead_end_count
-
-    def dead_end_ratio(self) -> float:
-        """Return the ratio of dead ends to normal cells."""
-        normal_cell_count = sum(
-            1
-            for row in self.maze.cells
-            for cell in row
-            if not cell.blocked
-        )
-        if normal_cell_count == 0:
-            return 0.0
-        return (
-            self.count_dead_ends()
-            / normal_cell_count
-        )
-
-    def has_consistent_walls(self) -> bool:
-        """Check whether neighboring cells have matching walls."""
-        for row in self.maze.cells:
-            for cell in row:
-                neighbors = self.maze.get_neighbors(cell)
-
-                if "E" in neighbors:
-                    if cell.east != neighbors["E"].west:
-                        return False
-                if "S" in neighbors:
-                    if cell.south != neighbors["S"].north:
-                        return False
-
-        return True
-
-    def has_closed_external_borders(
-        self,
-    ) -> bool:
-        """Check whether every external maze border is closed."""
-        for x in range(self.maze.width):
-            top = self.maze.get_cell(
-                x,
-                0,
-            )
-            bottom = self.maze.get_cell(
-                x,
-                self.maze.height - 1,
-            )
-
-            if not top.north:
-                return False
-            if not bottom.south:
-                return False
-
-        for y in range(self.maze.height):
-            left = self.maze.get_cell(
-                0,
-                y,
-            )
-            right = self.maze.get_cell(
-                self.maze.width - 1,
-                y,
-            )
-
-            if not left.west:
-                return False
-            if not right.east:
-                return False
-
-        return True

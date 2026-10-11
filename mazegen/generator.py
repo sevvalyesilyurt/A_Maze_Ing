@@ -283,15 +283,6 @@ class MazeGenerator:
                 directions.append(direction)
         return directions
 
-    def _count_dead_ends(
-        self,
-        maze: Maze,
-    ) -> int:
-        """Return the number of dead ends in the maze."""
-        return len(
-            self._get_dead_ends(maze)
-        )
-
     def _try_reduce_dead_end(
         self,
         maze: Maze,
