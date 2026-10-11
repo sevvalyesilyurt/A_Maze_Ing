@@ -402,7 +402,7 @@ The project was developed and verified using tools including:
 The following resources were used during the research and development of the
 project:
 
-- **A-Maze-ing Subject** — used as the main reference for project requirements,
+- **A-Maze-ing Subject** — Used as the main reference for project requirements,
   maze rules, configuration format, hexadecimal wall representation,
   visualization, and reusable-module requirements.
 
@@ -412,36 +412,36 @@ project:
   https://www.btkakademi.gov.tr/portal/tr/course/17500
 
 - **BTK Akademi — Algoritma Programlama ve Veri Yapılarına Giriş** — consulted
-  for fundamental algorithm, stack, queue, graph, and data-structure concepts.
+  For fundamental algorithm, stack, queue, graph, and data-structure concepts.
   https://www.btkakademi.gov.tr/portal/tr/course/12565
 
 - **Bilgisayar Kavramları — Şadi Evren Şeker, Breadth-First Search (BFS)** —
-  consulted to better understand level-by-level graph traversal used by the
+  Consulted to better understand level-by-level graph traversal used by the
   shortest-path solver.
   https://bilgisayarkavramlari.com/2008/11/13/sig-oncelikli-arama-breadth-first-search/
 
 - **Dokuz Eylül University — Research on Search Algorithms in Two-Dimensional Mazes** — 
-  consulted as an academic reference for the use of search
+  Consulted as an academic reference for the use of search
   algorithms such as DFS and BFS in maze problems.
 
 - **Al Sweigart — The Recursive Book of Recursion: Maze Generator** —
-  consulted for maze-generation concepts such as randomized movement,
+  Consulted for maze-generation concepts such as randomized movement,
   visited cells, corridor carving, and backtracking.
   https://inventwithpython.com/recursion/chapter11.html
 
-- **Python Documentation** — used for Python language features and standard
+- **Python Documentation** — Used for Python language features and standard
   library components such as `random` and `collections.deque`.
   https://docs.python.org/3/
 
-- **Python Packaging User Guide** — used while preparing `pyproject.toml`,
+- **Python Packaging User Guide** — Used while preparing `pyproject.toml`,
   the reusable `mazegen` package, and the wheel distribution.
   https://packaging.python.org/
 
-- **mypy Documentation** — used for static type checking and type annotation
+- **mypy Documentation** — Used for static type checking and type annotation
   issues.
   https://mypy.readthedocs.io/
 
-- **Flake8 Documentation** — used for Python style and linting checks.
+- **Flake8 Documentation** — Used for Python style and linting checks.
   https://flake8.pycqa.org/
 
 ### AI Usage
