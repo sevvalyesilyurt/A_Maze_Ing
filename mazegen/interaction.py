@@ -1,3 +1,8 @@
+"""Manage interactive terminal commands and maze animations."""
+
+import sys
+
+from .animation import MazeAnimator
 from .generator import MazeGenerator
 from .maze import Maze
 from .output import write_output
@@ -76,21 +81,30 @@ class MazeInteraction:
         color = self.WALL_COLORS[self.color_index]
         self.renderer.set_wall_color(color)
 
-    def _regenerate(self) -> None:
-        """Generate a new maze and update its output file."""
+    def _regenerate(self, animated: bool = False) -> None:
+        """Generate a maze, optionally animating the build steps."""
+        animator = MazeAnimator(self.renderer) if animated else None
         self.maze = self.generator.generate(
             entry=self.entry,
             exit=self.exit,
             perfect=self.perfect,
+            on_step=animator.draw if animator else None,
         )
+        if animator is not None:
+            animator.finish(self.maze)
         solver = MazeSolver(self.maze)
         self.path = solver.solve()
-
         write_output(
             self.output_file,
             self.maze,
             self.path,
         )
+
+    def _animate_solution(self) -> None:
+        """Animate the previously calculated shortest path."""
+        self.show_path = True
+        animator = MazeAnimator(self.renderer)
+        animator.animate_solution(self.maze, self.path)
 
     def run(self) -> None:
         """Run the interactive terminal menu."""
@@ -99,6 +113,7 @@ class MazeInteraction:
         while True:
             print()
             print("[P] Show / Hide shortest path")
+            print("[A] Animate generation and shortest path")
             print("[R] Regenerate maze")
             print("[C] Change wall colour")
             print("[Q] Quit")
@@ -109,6 +124,17 @@ class MazeInteraction:
 
             if choice == "p":
                 self._toggle_path()
+                self._display()
+            elif choice == "a":
+                sys.stdout.write("\033[?1049h")
+                sys.stdout.flush()
+                try:
+                    self._regenerate(animated=True)
+                    self._animate_solution()
+                finally:
+                    sys.stdout.write("\033[?1049l")
+                    sys.stdout.write("\033[H\033[2J")
+                    sys.stdout.flush()
                 self._display()
             elif choice == "r":
                 self._regenerate()

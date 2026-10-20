@@ -1,9 +1,9 @@
 from random import Random
-
 from .cell import Cell
 from .maze import Maze
 from .pattern import Pattern42
 from .validator import MazeValidator
+from collections.abc import Callable
 
 
 class MazeGenerator:
@@ -25,6 +25,7 @@ class MazeGenerator:
         self.width = width
         self.height = height
         self.rng = Random(seed)
+        self._on_step: Callable[[Maze], None] | None = None
         self.pattern = Pattern42(
             width,
             height,
@@ -35,6 +36,7 @@ class MazeGenerator:
         entry: tuple[int, int],
         exit: tuple[int, int],
         perfect: bool = True,
+        on_step: Callable[[Maze], None] | None = None,
     ) -> Maze:
         """Generate and return a maze.
 
@@ -49,6 +51,7 @@ class MazeGenerator:
         Raises:
             ValueError: If the generated maze is invalid.
         """
+        self._on_step = on_step
         maze = Maze(
             self.width,
             self.height,
@@ -191,6 +194,7 @@ class MazeGenerator:
                 )
                 next_cell.visited = True
                 stack.append(next_cell)
+                self._show_animation_step(maze)
             else:
                 stack.pop()
 
@@ -384,10 +388,15 @@ class MazeGenerator:
         )
         validator = MazeValidator(maze)
 
-        if validator.has_open_3x3():
+        if validator.contains_fully_open_3x3_area_3x3():
             maze.add_wall(
                 cell,
                 direction,
             )
             return False
         return True
+
+    def _show_animation_step(self, maze: Maze) -> None:
+        """Notify an optional visualizer after a maze update."""
+        if self._on_step is not None:
+            self._on_step(maze)

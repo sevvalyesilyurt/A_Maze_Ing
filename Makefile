@@ -1,7 +1,8 @@
+
 PYTHON ?= python3
 CONFIG ?= config.txt
 
-.PHONY: install run debug clean lint
+.PHONY: install run debug build clean lint
 
 install:
 	$(PYTHON) -m pip install .
@@ -12,10 +13,12 @@ run:
 debug:
 	$(PYTHON) -m pdb a_maze_ing.py $(CONFIG)
 
+build:
+	$(PYTHON) -m build --wheel --outdir .
+
 clean:
-	$(PYTHON) -c "import pathlib, shutil; [shutil.rmtree(p, ignore_errors=True) for p in pathlib.Path('.').rglob('__pycache__')]"
-	$(PYTHON) -c "import pathlib; [p.unlink() for p in pathlib.Path('.').rglob('*.pyc')]"
-	$(PYTHON) -c "import pathlib, shutil; [shutil.rmtree(p, ignore_errors=True) for p in pathlib.Path('.').glob('.mypy_cache')]"
+	$(PYTHON) -c "from pathlib import Path; import shutil; roots = [Path('mazegen'), Path('tests')]; folders = [Path('__pycache__'), Path('.mypy_cache'), Path('build'), Path('dist'), *Path('.').glob('*.egg-info')]; folders += [p for root in roots for p in root.rglob('__pycache__')]; [shutil.rmtree(p, ignore_errors=True) for p in folders if p.is_dir()]"
+	$(PYTHON) -c "from pathlib import Path; roots = [Path('mazegen'), Path('tests')]; files = list(Path('.').glob('*.pyc')) + [p for root in roots for p in root.rglob('*.pyc')]; [p.unlink() for p in files if p.is_file()]"
 
 lint:
 	$(PYTHON) -m flake8 .

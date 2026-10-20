@@ -114,7 +114,7 @@ class MazeValidator:
 
         return True
 
-    def has_open_3x3(
+    def contains_fully_open_3x3_area_3x3(
         self,
     ) -> bool:
         """Check whether the maze contains a fully open 3x3 area."""
